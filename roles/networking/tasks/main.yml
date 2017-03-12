@@ -9,3 +9,7 @@
 - name: networking | setup jumbo frames for ppp
   copy: src=provider dest=/etc/ppp/peers/provider mode=0640
   notify: restart networking
+
+- name: networking | turn on fq_codel as default qdisc
+  sysctl: name=net.core.default_qdisc value=fq_codel
+  notify: restart networking
