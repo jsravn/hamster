@@ -2,5 +2,6 @@
 - hosts: routers
   become: yes
   roles:
+    - system
     - networking
     - firewall

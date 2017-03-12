@@ -1,0 +1,4 @@
+---
+- name: system | enable persistent journal log
+  copy: src=journald.conf dest=/etc/systemd/journald.conf
+  notify: restart journald
