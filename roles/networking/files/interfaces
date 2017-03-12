@@ -10,15 +10,19 @@ auto provider
 iface provider inet ppp
         pre-up /sbin/ifconfig eth0 up
         provider provider
+        post-up /sbin/ethtool -K ppp0 gro off gso off
+        post-up /sbin/ethtool -K eth0 gro off gso off tso off
 
 # LAN
 auto eth1
 iface eth1 inet static
         address 192.168.82.1
         netmask 255.255.255.0
+        post-up /sbin/ethtool -K eth1 gro off gso off tso off
 
 # OPT1 - Separate from LAN
 auto eth2
 iface eth2 inet static
         address 192.168.83.1
         netmask 255.255.255.0
+        post-up /sbin/ethtool -K eth2 gro off gso off tso off
