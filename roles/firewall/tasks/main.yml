@@ -15,6 +15,7 @@
     - interfaces
     - policy
     - zones
+    - rules
   notify:
     - check shorewall
     - reload shorewall

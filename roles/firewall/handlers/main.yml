@@ -3,4 +3,4 @@
   command: shorewall check
 
 - name: reload shorewall
-  command: shorewall reload
+  service: name=shorewall state=restarted
