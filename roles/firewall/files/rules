@@ -1,1 +1,2 @@
 ACCEPT opt1 fw udp 53
+ACCEPT opt1 fw tcp 53
