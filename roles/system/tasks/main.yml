@@ -2,3 +2,22 @@
 - name: system | enable persistent journal log
   copy: src=journald.conf dest=/etc/systemd/journald.conf
   notify: restart journald
+
+- name: system | install useful packages
+  package: name={{ item }} state=present
+  with_items:
+    - vim
+    - tmux
+    - conntrack
+    - htop
+
+- name: system | install unattended upgrades
+  package: name={{ item }} state=present
+  with_items:
+    - unattended-upgrades
+
+- name: system | configure unattended upgrades
+  copy: src={{ item }} dest=/etc/apt/apt.conf.d/{{ item }}
+  with_items:
+    - 50unattended-upgrades
+    - 20auto-upgrades
