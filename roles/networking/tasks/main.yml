@@ -1,0 +1,7 @@
+---
+- name: networking | configure interfaces
+  copy: src=interfaces dest=/etc/network/interfaces
+  notify: restart networking
+
+- name: networking | enable ip forwarding
+  sysctl: name=net.ipv4.ip_forward value=1

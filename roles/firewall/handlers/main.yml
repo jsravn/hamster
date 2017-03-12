@@ -1,0 +1,6 @@
+---
+- name: check shorewall
+  command: shorewall check
+
+- name: restart shorewall
+  service: name=shorewall state=restarted

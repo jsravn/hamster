@@ -1,0 +1,23 @@
+---
+- name: firewall | install shorewall
+  package: name=shorewall state=present
+
+- name: firewall | shorewall defaults
+  copy: src=etc_default_shorewall dest=/etc/default/shorewall
+  notify:
+    - check shorewall
+    - restart shorewall
+
+- name: firewall | shorewall config files
+  copy: src={{ item }} dest=/etc/shorewall/{{ item }}
+  with_items:
+    - masq
+    - interfaces
+    - policy
+    - zones
+  notify:
+    - check shorewall
+    - restart shorewall
+
+- name: firewall | enable shorewall
+  service: name=shorewall enabled=yes

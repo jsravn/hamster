@@ -1,0 +1,24 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# PPPoE connection
+auto provider
+iface provider inet ppp
+        pre-up /sbin/ifconfig eth0 up
+        provider provider
+
+# LAN
+auto eth1
+iface eth1 inet static
+        address 192.168.82.1
+        netmask 255.255.255.0
+
+# OPT1 - Separate from LAN
+auto eth2
+iface eth2 inet static
+        address 192.168.83.1
+        netmask 255.255.255.0

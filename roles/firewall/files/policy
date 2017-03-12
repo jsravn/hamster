@@ -1,0 +1,5 @@
+wan all DROP
+fw all ACCEPT
+lan all ACCEPT
+opt1 wan ACCEPT
+all all REJECT
