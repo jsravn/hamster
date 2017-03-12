@@ -2,7 +2,8 @@
 - hosts: routers
   become: yes
   roles:
-    - system
-    - networking
-    - firewall
-    - dhcp
+    - { role: system, tags: system }
+    - { role: networking, tags: networking }
+    - { role: firewall, tags: firewall }
+    - { role: dns, tags: dns }
+    - { role: dhcp, tags: dhcp }

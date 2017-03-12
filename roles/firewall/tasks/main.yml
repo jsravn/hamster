@@ -6,7 +6,7 @@
   copy: src=etc_default_shorewall dest=/etc/default/shorewall
   notify:
     - check shorewall
-    - restart shorewall
+    - reload shorewall
 
 - name: firewall | shorewall config files
   copy: src={{ item }} dest=/etc/shorewall/{{ item }}
@@ -17,7 +17,7 @@
     - zones
   notify:
     - check shorewall
-    - restart shorewall
+    - reload shorewall
 
 - name: firewall | enable shorewall
-  service: name=shorewall enabled=yes
+  service: name=shorewall enabled=yes state=started
