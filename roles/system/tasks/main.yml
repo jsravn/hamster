@@ -18,6 +18,7 @@
     - tmux
     - conntrack
     - htop
+    - curl
 
 - name: system | install intel microcode updates
   package: name=intel-microcode state=present

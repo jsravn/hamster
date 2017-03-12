@@ -12,3 +12,6 @@
 
 - name: dhcp | enable dhcpd server
   service: name=isc-dhcp-server enabled=yes
+
+- name: dhcp | copy oui.txt for dhcp-lease-list
+  copy: src=oui.txt dest=/usr/local/etc/oui.txt
