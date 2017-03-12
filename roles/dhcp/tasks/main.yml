@@ -1,0 +1,14 @@
+---
+- name: dhcp | install server
+  package: name=isc-dhcp-server state=present
+
+- name: dhcp | copy defaults config
+  copy: src=isc-dhcp-server dest=/etc/default/isc-dhcp-server
+  notify: restart dhcpd
+
+- name: dhcp | copy dhcpd config
+  copy: src=dhcpd.conf dest=/etc/dhcp/dhcpd.conf
+  notify: restart dhcpd
+
+- name: dhcp | enable dhcpd server
+  service: name=isc-dhcp-server enabled=yes

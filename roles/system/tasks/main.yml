@@ -3,6 +3,14 @@
   copy: src=journald.conf dest=/etc/systemd/journald.conf
   notify: restart journald
 
+- name: system | setup apt sources
+  copy: src=sources.list dest=/etc/apt/sources.list
+  register: r
+
+- name: system | update apt
+  command: apt update
+  when: r|changed
+
 - name: system | install useful packages
   package: name={{ item }} state=present
   with_items:
@@ -10,6 +18,9 @@
     - tmux
     - conntrack
     - htop
+
+- name: system | install intel microcode updates
+  package: name=intel-microcode state=present
 
 - name: system | install unattended upgrades
   package: name={{ item }} state=present
