@@ -16,6 +16,9 @@
     - policy
     - zones
     - rules
+    - init
+    - tcclasses
+    - tcdevices
   notify:
     - check shorewall
     - reload shorewall

@@ -1,0 +1,2 @@
+ppp0 0 19mbit
+ifb0 0 72mbit classify ppp0

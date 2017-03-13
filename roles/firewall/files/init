@@ -1,0 +1,2 @@
+modprobe ifb numifbs=1
+ip link set ifb0 up
