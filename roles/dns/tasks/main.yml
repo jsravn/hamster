@@ -1,4 +1,10 @@
 ---
+- name: dns | install resolvconf so unbound can update local dns
+  package: name=resolvconf state=present
+
+- name: dns | enable resolvconf
+  service: name=resolvconf state=started enabled=yes
+
 - name: dns | install server
   package: name=unbound state=present
 
