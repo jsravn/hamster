@@ -28,6 +28,12 @@
   with_items:
     - unattended-upgrades
 
+- name: system | install chrony
+  package: name=chrony state=present
+
+- name: system | enable chrony
+  service: name=chrony enabled=yes
+
 - name: system | configure unattended upgrades
   copy: src={{ item }} dest=/etc/apt/apt.conf.d/{{ item }}
   with_items:
