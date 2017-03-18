@@ -13,3 +13,7 @@
 - name: networking | turn on fq_codel as default qdisc
   sysctl: name=net.core.default_qdisc value=fq_codel
   notify: restart networking
+
+- name: networking | copy ethtool ip-up.d to disable offloading for ppp
+  copy: src=ppp-ethtool dest=/etc/ppp/ip-up.d/ethtool mode=0755
+  notify: restart networking
