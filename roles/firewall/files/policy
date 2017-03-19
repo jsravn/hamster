@@ -3,4 +3,5 @@ fw all ACCEPT
 lan all ACCEPT
 opt1 wan ACCEPT
 vpn lan ACCEPT
+vpn modem ACCEPT
 all all REJECT

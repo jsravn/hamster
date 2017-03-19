@@ -1,3 +1,4 @@
 wan ppp0 detect routefilter,tcpflags
 lan eth1 detect dhcp
 opt1 eth2 detect dhcp
+modem eth0
