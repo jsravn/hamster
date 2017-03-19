@@ -19,6 +19,8 @@
     - init
     - tcclasses
     - tcdevices
+    - tunnels
+    - hosts
   notify:
     - check shorewall
     - reload shorewall

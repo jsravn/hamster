@@ -1,0 +1,10 @@
+---
+- name: ipsec | install strongswan
+  package: name=strongswan state=present
+
+- name: ipsec | copy ipsec.conf
+  copy: src=ipsec.conf dest=/etc/ipsec.conf
+  notify: restart strongswan
+
+- name: ipsec | enable strongswan
+  service: name=strongswan enabled=yes

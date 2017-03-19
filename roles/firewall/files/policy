@@ -2,4 +2,5 @@ wan all DROP
 fw all ACCEPT
 lan all ACCEPT
 opt1 wan ACCEPT
+vpn lan ACCEPT
 all all REJECT
