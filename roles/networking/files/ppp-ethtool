@@ -1,1 +1,2 @@
+#!/bin/sh
 /sbin/ethtool -K ppp0 gro off gso off

@@ -12,7 +12,6 @@ iface provider inet ppp
         pre-up /sbin/ifconfig eth0 mtu 1508
         pre-up /sbin/ethtool -K eth0 gro off gso off tso off
         provider provider
-        post-up /sbin/ethtool -K ppp0 gro off gso off
         post-up /sbin/shorewall refresh
 
 # LAN
