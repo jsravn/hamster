@@ -6,7 +6,7 @@
 - name: networking | enable ip forwarding
   sysctl: name=net.ipv4.ip_forward value=1
 
-- name: networking | setup jumbo frames for ppp
+- name: networking | setup zen provider
   copy: src=provider dest=/etc/ppp/peers/provider mode=0640
   notify: restart networking
 

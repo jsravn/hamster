@@ -52,3 +52,6 @@ default-asyncmap
 nopcomp
 noccp
 novj
+
+# Enable ipv6
++ipv6

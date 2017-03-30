@@ -6,5 +6,9 @@
   copy: src=ipsec.conf dest=/etc/ipsec.conf
   notify: restart strongswan
 
+- name: ipsec | copy charon-logging.conf
+  copy: src=charon-logging.conf dest=/etc/strongswan.d/charon-logging.conf
+  notify: restart strongswan
+
 - name: ipsec | enable strongswan
   service: name=strongswan enabled=yes
