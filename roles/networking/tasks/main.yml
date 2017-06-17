@@ -20,3 +20,6 @@
 
 - name: networking | expand ephemeral port range
   sysctl: name=net.ipv4.ip_local_port_range value="1024 65535"
+
+- name: networking | copy shorewall restart script to ppp ip-up.d
+  copy: src=shorewall dest=/etc/ppp/ip-up.d/shorewall mode=0755

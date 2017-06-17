@@ -17,7 +17,6 @@ iface eth0 inet static
 auto provider
 iface provider inet ppp
         provider provider
-        post-up /sbin/shorewall refresh
 
 # LAN
 auto eth1
