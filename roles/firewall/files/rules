@@ -6,4 +6,4 @@ ACCEPT  wan:52.30.226.32    fw                  udp     5001
 ACCEPT  wan:52.30.226.32    fw                  tcp     5001
 # ssh/mosh to odin
 DNAT    wan                 lan:192.168.82.10   tcp     22
-DNAT    wan                 lan:192.168.82.10   udp     60000
+DNAT    wan                 lan:192.168.82.10   udp     60000-60005
