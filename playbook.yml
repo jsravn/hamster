@@ -7,4 +7,5 @@
     - { role: firewall, tags: firewall }
     - { role: dns, tags: dns }
     - { role: dhcp, tags: dhcp }
+    - { role: letsencrypt, tags: letsencrypt }
     - { role: ipsec, tags: ipsec }
