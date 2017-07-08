@@ -1,9 +1,6 @@
-#ACTION SOURCE              DEST                PROTO   DPORT   SPORT   ORIGDEST
-ACCEPT  opt1                fw                  udp     53
-ACCEPT  opt1                fw                  tcp     53
-ACCEPT  wan                 fw                  icmp    0,3,4,8,11
-ACCEPT  wan:52.30.226.32    fw                  udp     5001
-ACCEPT  wan:52.30.226.32    fw                  tcp     5001
-# ssh/mosh to odin
-DNAT    wan                 lan:192.168.82.10   tcp     22
-DNAT    wan                 lan:192.168.82.10   udp     60000:60005
+#ACTION SOURCE              DEST                    PROTO   DPORT   SPORT   ORIGDEST
+ACCEPT  opt1                fw                      udp     53
+ACCEPT  opt1                fw                      tcp     53
+ACCEPT  wan                 fw                      icmp    0,3,4,8,11
+ACCEPT  wan:52.30.226.32    fw                      udp     5001
+ACCEPT  wan:52.30.226.32    fw                      tcp     5001
