@@ -1,7 +1,10 @@
-wan all DROP
-fw all ACCEPT
-lan all ACCEPT
-opt1 wan ACCEPT
-vpn lan ACCEPT
-vpn modem ACCEPT
-all all REJECT
+#SOURCE       DESTINATION         POLICY         LOGLEVEL          BURST
+wan           all                 DROP           info
+fw            all                 ACCEPT
+lan           all                 ACCEPT
+opt1          wan                 ACCEPT
+vpn           lan                 ACCEPT
+vpn           modem               ACCEPT
+road          lan                 ACCEPT
+road          fw                  ACCEPT
+all           all                 REJECT         info
