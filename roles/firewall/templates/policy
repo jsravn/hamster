@@ -3,7 +3,7 @@ wan           all                 DROP
 fw            all                 ACCEPT
 lan           all                 ACCEPT
 opt1          wan                 ACCEPT
-vpn           lan                 ACCEPT
-vpn           modem               ACCEPT
-road          all                 ACCEPT
+rvn           modem               ACCEPT
+road          wan                 ACCEPT
+road          lan                 ACCEPT
 all           all                 REJECT

@@ -1,3 +1,0 @@
-ipsecnat wan 52.30.226.32
-ipsecnat wan 0.0.0.0/0 road
-ipsec wan 0.0.0.0/0 road

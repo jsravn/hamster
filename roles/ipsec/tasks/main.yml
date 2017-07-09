@@ -3,7 +3,7 @@
   package: name=strongswan state=present
 
 - name: ipsec | copy ipsec.conf
-  copy: src=ipsec.conf dest=/etc/ipsec.conf
+  template: src=ipsec.conf dest=/etc/ipsec.conf
   notify: restart strongswan
 
 - name: ipsec | copy charon-logging.conf
