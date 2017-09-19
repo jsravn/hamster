@@ -6,8 +6,7 @@
 # by the DSL user name given to your by your DSL provider.
 # There should be a matching entry with the password in /etc/ppp/pap-secrets
 # and/or /etc/ppp/chap-secrets.
-#user "myusername@myprovider.net"
-user "zen271691@zen"
+user "02088760580@pulse8broadband.co.uk"
 
 #linkname provider
 #debug
@@ -54,4 +53,4 @@ noccp
 novj
 
 # Enable ipv6
-+ipv6
+#+ipv6
