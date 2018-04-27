@@ -13,7 +13,11 @@
   notify: restart unbound
 
 - name: dns | copy home config
-  template: src=home.conf dest=/etc/unbound/unbound.conf.d/home.conf
+  template: src=home.conf dest=/etc/unbound/unbound.conf.d/
+  notify: restart unbound
+
+- name: dns | copy blocking config
+  copy: src=block.conf dest=/etc/unbound/unbound.conf.d/
   notify: restart unbound
 
 - name: unbound | enable unbound server
