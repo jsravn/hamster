@@ -34,3 +34,8 @@
 - name: networking | copy darkstat config
   copy: src=darkstat-init.cfg dest=/etc/darkstat/init.cfg
   notify: restart darkstat
+
+- name: networking | disable log martions
+  sysctl: name=net.ipv4.conf.{{ item }}.log_martians value=0
+  with_items:
+  - eth1
