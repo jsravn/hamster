@@ -1,4 +1,7 @@
 ---
+- name: networking | install bridge-utils
+  package: name=bridge-utils state=installed
+
 - name: networking | configure interfaces
   copy: src=interfaces dest=/etc/network/interfaces
   notify: restart networking
@@ -35,7 +38,7 @@
   copy: src=darkstat-init.cfg dest=/etc/darkstat/init.cfg
   notify: restart darkstat
 
-- name: networking | disable log martions
+- name: networking | disable log martians
   sysctl: name=net.ipv4.conf.{{ item }}.log_martians value=0
   with_items:
   - eth1

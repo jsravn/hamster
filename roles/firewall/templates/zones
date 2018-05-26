@@ -2,7 +2,6 @@
 fw      firewall
 wan     ipv4
 lan     ipv4
-opt1    ipv4
 modem   ipv4
 rvn     ipsec
 road    ipsec

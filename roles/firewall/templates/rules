@@ -1,6 +1,4 @@
 #ACTION SOURCE              DEST                    PROTO   DPORT   SPORT   ORIGDEST
-ACCEPT  opt1                fw                      udp     53
-ACCEPT  opt1                fw                      tcp     53
 ACCEPT  road                fw                      udp     53
 ACCEPT  road                fw                      tcp     53
 ACCEPT  wan                 fw                      icmp    0,3,4,8,11

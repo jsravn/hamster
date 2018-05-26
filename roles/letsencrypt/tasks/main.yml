@@ -1,5 +1,5 @@
 ---
-- apt: name=certbot state=present default_release=jessie-backports
+- apt: name=certbot state=present
 
 # Sets up renewal.
 # This relies on manual initial certificate creation using:

@@ -18,16 +18,20 @@ auto provider
 iface provider inet ppp
         provider provider
 
-# LAN
-auto eth1
-iface eth1 inet static
+# Bridged interfaces
+iface eth1 inet manual
+iface eth2 inet manual
+iface eth3 inet manual
+
+# LAN Bridge
+auto br0
+iface br0 inet static
+    bridge_ports eth1 eth2 eth3
         address 192.168.82.1
         netmask 255.255.255.0
-        post-up /sbin/ethtool -K eth1 gro off gso off tso off
 
-# OPT1 - Separate from LAN
-auto eth2
-iface eth2 inet static
-        address 192.168.83.1
-        netmask 255.255.255.0
+        # Disable any sort of offloading to avoid buffers/latency
+        post-up /sbin/ethtool -K br0 gro off gso off tso off
+        post-up /sbin/ethtool -K eth1 gro off gso off tso off
         post-up /sbin/ethtool -K eth2 gro off gso off tso off
+        post-up /sbin/ethtool -K eth3 gro off gso off tso off
