@@ -2,6 +2,8 @@
 ACCEPT  wan                 fw                      icmp    0,3,4,8,11
 # used for letsencrypt certificate
 ACCEPT  wan                 fw                      tcp     443
+# wireguard/vpn
+ACCEPT  wan                 fw                      udp     {{ wireguard_port }}
 # dolphin port forwarding
 DNAT    wan                 lan:192.168.82.10       tcp     2626
 DNAT    wan                 lan:192.168.82.10       udp     2626

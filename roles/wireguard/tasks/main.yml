@@ -1,0 +1,13 @@
+---
+- copy: src=limit-unstable dest=/etc/apt/preferences.d/
+
+- apt_repository:
+    repo: deb http://deb.debian.org/debian/ unstable main
+    state: present
+
+- package:
+    name: wireguard
+    state: present
+
+- template: src=wg0.conf dest=/etc/wireguard/ mode=0600
+  notify: restart networking

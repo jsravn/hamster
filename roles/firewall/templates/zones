@@ -3,3 +3,4 @@ fw      firewall
 wan     ipv4
 lan     ipv4
 modem   ipv4
+vpn     ipv4

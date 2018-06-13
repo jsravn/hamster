@@ -11,7 +11,7 @@
 - name: firewall | shorewall config files
   template: src={{ item }} dest=/etc/shorewall/{{ item }}
   with_items:
-    - masq
+    - snat
     - interfaces
     - policy
     - zones
