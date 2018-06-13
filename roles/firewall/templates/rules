@@ -1,6 +1,4 @@
 #ACTION SOURCE              DEST                    PROTO   DPORT   SPORT   ORIGDEST
-ACCEPT  road                fw                      udp     53
-ACCEPT  road                fw                      tcp     53
 ACCEPT  wan                 fw                      icmp    0,3,4,8,11
 # used for letsencrypt certificate
 ACCEPT  wan                 fw                      tcp     443

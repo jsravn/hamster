@@ -1,2 +1,0 @@
-rvn ppp0:{{ rvn_ip }}/32
-road ppp0:10.10.3.0/24

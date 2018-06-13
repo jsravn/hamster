@@ -1,4 +1,0 @@
-ipsecnat wan {{ rvn_ip }} rvn
-ipsec wan {{ rvn_ip }} rvn
-ipsecnat wan 0.0.0.0/0 road
-ipsec wan 0.0.0.0/0 road

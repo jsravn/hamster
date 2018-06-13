@@ -2,7 +2,4 @@
 wan           all                 DROP
 fw            all                 ACCEPT
 lan           all                 ACCEPT
-rvn           modem               ACCEPT
-road          wan                 ACCEPT
-road          lan                 ACCEPT
 all           all                 REJECT
