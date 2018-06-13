@@ -27,7 +27,7 @@ Unattended-Upgrade::Origins-Pattern {
       "o=Debian,n=jessie";
       "o=Debian,n=jessie-updates";
 //      "o=Debian,n=jessie-proposed-updates";
-//      "o=Debian,n=jessie,l=Debian-Security";
+      "o=Debian,n=jessie,l=Debian-Security";
 
         // Archive or Suite based matching:
         // Note that this will silently match a different release after
@@ -36,7 +36,7 @@ Unattended-Upgrade::Origins-Pattern {
 //      "o=Debian,a=stable";
 //      "o=Debian,a=stable-updates";
 //      "o=Debian,a=proposed-updates";
-        "origin=Debian,codename=${distro_codename},label=Debian-Security";
+//        "origin=Debian,codename=${distro_codename},label=Debian-Security";
 };
 
 // List of packages to not update (regexp are supported)
