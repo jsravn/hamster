@@ -36,6 +36,7 @@ lcp-echo-failure 3
 
 # Makes pppd "dial again" when the connection is lost.
 persist
+maxfail 0
 
 # Do not ask the remote to authenticate.
 noauth
