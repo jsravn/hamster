@@ -7,3 +7,10 @@ ACCEPT  wan                 fw                      udp     {{ wireguard_port }}
 # dolphin port forwarding
 DNAT    wan                 lan:192.168.82.10       tcp     2626
 DNAT    wan                 lan:192.168.82.10       udp     2626
+# cod4
+DNAT    wan                 lan:192.168.82.10       tcp     3074
+DNAT    wan                 lan:192.168.82.10       tcp     27014:27050
+DNAT    wan                 lan:192.168.82.10       udp     3478
+DNAT    wan                 lan:192.168.82.10       udp     4379:4380
+DNAT    wan                 lan:192.168.82.10       udp     27000:27031 
+DNAT    wan                 lan:192.168.82.10       udp     27036
