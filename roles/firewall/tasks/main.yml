@@ -8,6 +8,22 @@
     - check shorewall
     - reload shorewall
 
+- name: firewall | shorewall conf
+  copy: src=shorewall.conf dest=/etc/shorewall/shorewall.conf
+  notify:
+    - check shorewall
+    - reload shorewall
+
+- name: firewall | remove old files
+  file: state=absent path=/etc/shorewall/{{ item }}
+  with_items:
+    - init
+    - tcclasses
+    - tcdevices
+  notify:
+    - check shorewall
+    - reload shorewall
+
 - name: firewall | shorewall config files
   template: src={{ item }} dest=/etc/shorewall/{{ item }}
   with_items:
@@ -16,9 +32,7 @@
     - policy
     - zones
     - rules
-    - init
-    - tcclasses
-    - tcdevices
+    - tcstart
     - tunnels
     - hosts
   notify:

@@ -11,7 +11,6 @@ iface enp0s20f0 inet static
         address 192.168.10.2
         netmask 255.255.255.0
         mtu 1508
-        post-up /sbin/ethtool -K enp0s20f0 gro off gso off tso off
 
 # PPPoE connection
 auto provider
@@ -29,12 +28,6 @@ iface br0 inet static
     bridge_ports enp0s20f1 enp0s20f2 enp0s20f3
         address 192.168.82.1
         netmask 255.255.255.0
-
-        # Disable any sort of offloading to avoid buffers/latency
-        post-up /sbin/ethtool -K br0 gro off gso off tso off
-        post-up /sbin/ethtool -K enp0s20f1 gro off gso off tso off
-        post-up /sbin/ethtool -K enp0s20f2 gro off gso off tso off
-        post-up /sbin/ethtool -K enp0s20f3 gro off gso off tso off
 
 # Wireguard (relies on the wireguard role)
 auto wg0

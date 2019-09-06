@@ -1,2 +1,0 @@
-ppp0 1 full full 1 default,fq_codel
-ifb0:2 1 full full 1 default,fq_codel

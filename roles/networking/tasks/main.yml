@@ -17,9 +17,8 @@
   sysctl: name=net.core.default_qdisc value=fq_codel
   notify: restart networking
 
-- name: networking | copy ethtool ip-up.d to disable offloading for ppp
-  copy: src=ppp-ethtool dest=/etc/ppp/ip-up.d/ethtool mode=0755
-  notify: restart networking
+- name: networking | remove ppp-ethtool
+  file: path=/etc/ppp/ip-up.d/ethtool state=absent
 
 - name: networking | expand ephemeral port range
   sysctl: name=net.ipv4.ip_local_port_range value="1024 65535"
@@ -33,4 +32,4 @@
   - enp0s20f1
 
 - name: networking | enable ecn
-  sysctl: name=net.ipv4.tcp_ecn=1
+  sysctl: name=net.ipv4.tcp_ecn value=1

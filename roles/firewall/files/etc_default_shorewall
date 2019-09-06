@@ -43,8 +43,4 @@ INITLOG=/dev/null
 #
 SAFESTOP=0
 
-# Initiate traffic shaping from shorewall.
-# TC_ENABLED=YES
-# CLEAR_TC=YES
-
 # EOF
