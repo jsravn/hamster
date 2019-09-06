@@ -43,8 +43,8 @@ INITLOG=/dev/null
 #
 SAFESTOP=0
 
-# Disable traffic shaping in Shorewall - we use debloat.sh instead.
-# TC_ENABLED=NO
-# CLEAR_TC=NO
+# Initiate traffic shaping from shorewall.
+# TC_ENABLED=YES
+# CLEAR_TC=YES
 
 # EOF

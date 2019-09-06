@@ -16,18 +16,18 @@
   copy: src=sources.list dest=/etc/apt/sources.list
   register: r
 
-# - name: system | update apt
-#   command: apt update
-#   when: r|changed
+- name: system | update apt
+  command: apt update
+  when: r|changed
 
-# - name: system | install useful packages
-#   package: name={{ item }} state=present
-#   with_items:
-#     - vim
-#     - tmux
-#     - conntrack
-#     - htop
-#     - curl
+- name: system | install useful packages
+  package: name={{ item }} state=present
+  with_items:
+    - vim
+    - tmux
+    - conntrack
+    - htop
+    - curl
 
 - name: system | install intel microcode updates
   package: name=intel-microcode state=present
