@@ -31,3 +31,6 @@
   sysctl: name=net.ipv4.conf.{{ item }}.log_martians value=0
   with_items:
   - enp0s20f1
+
+- name: networking | enable ecn
+  sysctl: name=net.ipv4.tcp_ecn=1
