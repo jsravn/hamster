@@ -6,12 +6,12 @@ auto lo
 iface lo inet loopback
 
 # vdsl modem
-auto eth0
-iface eth0 inet static
+auto enp0s20f0
+iface enp0s20f0 inet static
         address 192.168.10.2
         netmask 255.255.255.0
         mtu 1508
-        post-up /sbin/ethtool -K eth0 gro off gso off tso off
+        post-up /sbin/ethtool -K enp0s20f0 gro off gso off tso off
 
 # PPPoE connection
 auto provider
@@ -19,22 +19,22 @@ iface provider inet ppp
         provider provider
 
 # Bridged interfaces
-iface eth1 inet manual
-iface eth2 inet manual
-iface eth3 inet manual
+iface enp0s20f1 inet manual
+iface enp0s20f2 inet manual
+iface enp0s20f3 inet manual
 
 # LAN Bridge
 auto br0
 iface br0 inet static
-    bridge_ports eth1 eth2 eth3
+    bridge_ports enp0s20f1 enp0s20f2 enp0s20f3
         address 192.168.82.1
         netmask 255.255.255.0
 
         # Disable any sort of offloading to avoid buffers/latency
         post-up /sbin/ethtool -K br0 gro off gso off tso off
-        post-up /sbin/ethtool -K eth1 gro off gso off tso off
-        post-up /sbin/ethtool -K eth2 gro off gso off tso off
-        post-up /sbin/ethtool -K eth3 gro off gso off tso off
+        post-up /sbin/ethtool -K enp0s20f1 gro off gso off tso off
+        post-up /sbin/ethtool -K enp0s20f2 gro off gso off tso off
+        post-up /sbin/ethtool -K enp0s20f3 gro off gso off tso off
 
 # Wireguard (relies on the wireguard role)
 auto wg0
