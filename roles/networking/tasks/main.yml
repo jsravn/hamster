@@ -27,18 +27,7 @@
 - name: networking | copy shorewall restart script to ppp ip-up.d
   copy: src=shorewall dest=/etc/ppp/ip-up.d/shorewall mode=0755
 
-- name: networking | install darkstat for monitoring
-  package: name=darkstat state=installed
-  notify: restart darkstat
-
-- name: networking | enable darkstat
-  service: name=darkstat enabled=yes
-
-- name: networking | copy darkstat config
-  copy: src=darkstat-init.cfg dest=/etc/darkstat/init.cfg
-  notify: restart darkstat
-
 - name: networking | disable log martians
   sysctl: name=net.ipv4.conf.{{ item }}.log_martians value=0
   with_items:
-  - eth1
+  - enp0s20f1

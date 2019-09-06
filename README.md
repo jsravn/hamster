@@ -25,7 +25,6 @@ simply fork and tweak.
 * All tunables are in `group_vars/all.yml`.
 * The router auto applies updates and may reboot if necessary for a kernel upgrade. This should happen
 infrequently, but is necessary to ensure the security of the device.
-* darkstat runs on port 667 with basic networking stats
 
 # Networking
 

@@ -13,7 +13,7 @@ user "02088760580@pulse8broadband.co.uk"
 
 # Load the pppoe plugin. Change the ethernet interface name if needed.
 plugin rp-pppoe.so
-eth0
+enp0s20f0
 
 # Assumes that your IP address is allocated dynamically by the ISP.
 noipdefault

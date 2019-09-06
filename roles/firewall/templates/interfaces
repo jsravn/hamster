@@ -1,5 +1,5 @@
 # ZONE INTERFACE BROADCAST OPTIONS
 wan ppp0 detect routefilter,tcpflags
 lan br0 detect dhcp,bridge
-modem eth0
+modem enp0s20f0
 vpn wg0

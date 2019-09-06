@@ -3,22 +3,31 @@
   copy: src=journald.conf dest=/etc/systemd/journald.conf
   notify: restart journald
 
+# Unstable repo used only for wireguard. The limit-unstable file
+# prevents packages from inadvertently coming from unstable unless
+# explicitly installed.
+- copy: src=limit-unstable dest=/etc/apt/preferences.d/
+
+- apt_repository:
+    repo: deb http://deb.debian.org/debian/ unstable main
+    state: present
+
 - name: system | setup apt sources
   copy: src=sources.list dest=/etc/apt/sources.list
   register: r
 
-- name: system | update apt
-  command: apt update
-  when: r|changed
+# - name: system | update apt
+#   command: apt update
+#   when: r|changed
 
-- name: system | install useful packages
-  package: name={{ item }} state=present
-  with_items:
-    - vim
-    - tmux
-    - conntrack
-    - htop
-    - curl
+# - name: system | install useful packages
+#   package: name={{ item }} state=present
+#   with_items:
+#     - vim
+#     - tmux
+#     - conntrack
+#     - htop
+#     - curl
 
 - name: system | install intel microcode updates
   package: name=intel-microcode state=present

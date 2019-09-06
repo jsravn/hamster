@@ -1,6 +1,3 @@
 ---
 - name: restart networking
   service: name=networking state=restarted
-
-- name: restart darkstat
-  service: name=darkstat state=restarted

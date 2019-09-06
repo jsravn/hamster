@@ -1,10 +1,4 @@
 ---
-- copy: src=limit-unstable dest=/etc/apt/preferences.d/
-
-- apt_repository:
-    repo: deb http://deb.debian.org/debian/ unstable main
-    state: present
-
 - package:
     name: wireguard
     state: present
