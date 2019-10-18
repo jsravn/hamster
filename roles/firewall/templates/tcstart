@@ -4,11 +4,11 @@ modprobe sch_cake
 modprobe act_mirred
 
 iface="enp0s20f0"
-outbound="35mbit"
-inbound="370mbit"
+outbound="bandwidth 38mbit"
+inbound="unlimited"
 
 tc qdisc del dev $iface root 2>/dev/null || true
-tc qdisc add dev $iface root cake bandwidth $outbound besteffort nat docsis
+tc qdisc add dev $iface root cake $outbound besteffort nat docsis regional
 
 if ! ip link show ifb4${iface} > /dev/null; then
     ip link add name ifb4${iface} type ifb
@@ -18,7 +18,7 @@ tc qdisc del dev $iface handle ffff: ingress 2>/dev/null || true
 tc qdisc add dev $iface handle ffff: ingress
 
 tc qdisc del dev ifb4${iface} root 2>/dev/null || true
-tc qdisc add dev ifb4${iface} root cake bandwidth $inbound besteffort nat docsis
+tc qdisc add dev ifb4${iface} root cake $inbound besteffort nat docsis regional
 
 ip link set dev ifb4${iface} up
 
