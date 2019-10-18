@@ -5,7 +5,7 @@ modprobe act_mirred
 
 iface="enp0s20f0"
 outbound="35mbit"
-inbound="375mbit"
+inbound="370mbit"
 
 tc qdisc del dev $iface root 2>/dev/null || true
 tc qdisc add dev $iface root cake bandwidth $outbound besteffort nat docsis
