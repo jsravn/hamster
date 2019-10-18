@@ -5,15 +5,10 @@
 auto lo
 iface lo inet loopback
 
-# wan - virgin media
+# WAN - Virgin Media
 auto enp0s20f0
 allow-hotplug enp0s20f
 iface enp0s20f0 inet dhcp
-
-# PPPoE connection
-auto provider
-iface provider inet ppp
-        provider provider
 
 # Bridged interfaces
 iface enp0s20f1 inet manual
