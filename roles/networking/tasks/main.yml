@@ -9,23 +9,20 @@
 - name: networking | enable ip forwarding
   sysctl: name=net.ipv4.ip_forward value=1
 
-- name: networking | setup pulse8 provider
-  copy: src=provider dest=/etc/ppp/peers/provider mode=0640
+- name: networking | remove ppp files
+  file: path={{ item }} state=absent
   notify: restart networking
+  with_items:
+  - /etc/ppp/peers/provider
+  - /etc/ppp/ip-up.d/ethtool
+  - /etc/ppp/ip-up.d/shorewall
 
 - name: networking | turn on fq_codel as default qdisc
   sysctl: name=net.core.default_qdisc value=fq_codel
   notify: restart networking
 
-- name: networking | copy ethtool ip-up.d to disable offloading for ppp
-  copy: src=ppp-ethtool dest=/etc/ppp/ip-up.d/ethtool mode=0755
-  notify: restart networking
-
 - name: networking | expand ephemeral port range
   sysctl: name=net.ipv4.ip_local_port_range value="1024 65535"
-
-- name: networking | copy shorewall restart script to ppp ip-up.d
-  copy: src=shorewall dest=/etc/ppp/ip-up.d/shorewall mode=0755
 
 - name: networking | disable log martians
   sysctl: name=net.ipv4.conf.{{ item }}.log_martians value=0

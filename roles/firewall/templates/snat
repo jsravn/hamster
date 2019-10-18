@@ -1,3 +1,2 @@
 #ACTION SOURCE DEST
-MASQUERADE 192.168.0.0/16,{{ wireguard_ip }}/24 ppp0
-MASQUERADE 192.168.0.0/16 enp0s20f0
+MASQUERADE 192.168.0.0/16,{{ wireguard_ip }}/24 enp0s20f0

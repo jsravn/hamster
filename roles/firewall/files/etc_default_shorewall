@@ -15,7 +15,7 @@ startup=1
 # or, if you have defined  in /etc/shorewall/params
 #    wait_interface=
 
-wait_interface="ppp0"
+# wait_interface="ppp0"
 
 #
 # Global start/restart options

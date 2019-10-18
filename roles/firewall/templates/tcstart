@@ -2,24 +2,8 @@
 
 modprobe sch_cake
 modprobe act_mirred
-modprobe ifb numifbs=1
 
-# Ingress
-tc qdisc del dev ppp0 root 2>/dev/null || true
-tc qdisc add dev ppp0 root cake bandwidth 19mbit besteffort nat
+iface="enp0s20f0"
 
-# Egress
-if ! ip link show ifb4ppp0 > /dev/null; then
-        ip link add name ifb4ppp0 type ifb
-fi
-
-tc qdisc del dev ppp0 handle ffff: ingress 2>/dev/null || true
-tc qdisc add dev ppp0 handle ffff: ingress
-
-tc qdisc del dev ifb4ppp0 root 2>/dev/null || true
-tc qdisc add dev ifb4ppp0 root cake bandwidth 72mbit besteffort nat
-
-ip link set dev ifb4ppp0 up
-
-tc filter add dev ppp0 parent ffff: protocol all prio 10 u32 \
-    match u32 0 0 flowid 1:1 action mirred egress redirect dev ifb4ppp0
+tc qdisc del dev "$iface" root 2>/dev/null || true
+tc qdisc add dev "$iface" root cake bandwidth 50mbit besteffort nat
