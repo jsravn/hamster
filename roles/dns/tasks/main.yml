@@ -16,8 +16,12 @@
   template: src=home.conf dest=/etc/unbound/unbound.conf.d/
   notify: restart unbound
 
-- name: dns | copy blocking config
-  copy: src=block.conf dest=/etc/unbound/unbound.conf.d/
+# - name: dns | copy blocking config
+#   copy: src=block.conf dest=/etc/unbound/unbound.conf.d/
+#   notify: restart unbound
+
+- name: dns | remove block.conf
+  file: path=/etc/unbound/unbound.conf.d/block.conf state=absent
   notify: restart unbound
 
 - name: unbound | enable unbound server
