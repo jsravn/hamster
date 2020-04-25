@@ -1,6 +1,6 @@
 ---
 - name: networking | install bridge-utils
-  package: name=bridge-utils state=installed
+  package: name=bridge-utils state=present
 
 - name: networking | configure interfaces
   template: src=interfaces dest=/etc/network/interfaces
