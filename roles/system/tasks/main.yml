@@ -18,7 +18,7 @@
 
 - name: system | update apt
   command: apt update
-  when: r|changed
+  when: r is changed
 
 - name: system | install useful packages
   package: name={{ item }} state=present

@@ -3,9 +3,8 @@
   become: yes
   roles:
     - { role: system, tags: system }
-    - { role: wireguard, tags: wireguard }
+    # - { role: wireguard, tags: wireguard }
     - { role: networking, tags: networking }
     - { role: firewall, tags: firewall }
     - { role: dns, tags: dns }
     - { role: dhcp, tags: dhcp }
-    - { role: letsencrypt, tags: letsencrypt }
