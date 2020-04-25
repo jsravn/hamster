@@ -1,7 +1,0 @@
----
-- apt: name=certbot state=present
-
-# Sets up renewal.
-# This relies on manual initial certificate creation using:
-# `certbot certonly --standalone --preferred-challenges tls-sni -d home.r-vn.org`
-- cron: name="letsencrypt renew" special_time=monthly job="/usr/bin/certbot renew"
