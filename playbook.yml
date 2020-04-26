@@ -8,4 +8,5 @@
     - { role: firewall, tags: firewall }
     - { role: dns, tags: dns }
     - { role: dhcp, tags: dhcp }
+    - { role: monitoring, tags: monitoring }
     - { role: unifi, tags: unifi }

@@ -30,3 +30,10 @@ infrequently, but is necessary to ensure the security of the device.
 
 The network is setup based on a four port router using UK's openreach FTTC, which uses vDSL and pppoe. It will
 need to be modified based on your own configuration.
+
+# Grafana
+
+Grafana doesn't lend itself well to automation. So it is set up manually:
+
+1. Add the prometheus datasource at localhost:9090.
+2. Add the node exporter dashboard from  https://grafana.com/grafana/dashboards/1860.
