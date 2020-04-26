@@ -24,10 +24,5 @@
 - name: networking | expand ephemeral port range
   sysctl: name=net.ipv4.ip_local_port_range value="1024 65535"
 
-- name: networking | disable log martians
-  sysctl: name=net.ipv4.conf.{{ item }}.log_martians value=0
-  with_items:
-  - enp0s20f1
-
 - name: networking | enable ecn
   sysctl: name=net.ipv4.tcp_ecn value=1
