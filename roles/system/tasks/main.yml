@@ -43,6 +43,9 @@
 - name: system | enable chrony
   service: name=chrony enabled=yes
 
+- name: system | remove smartmontools - doesn't work on mmc
+  package: name=smartmontools state=absent
+
 - name: system | configure unattended upgrades
   template: src={{ item }} dest=/etc/apt/apt.conf.d/{{ item }}
   with_items:

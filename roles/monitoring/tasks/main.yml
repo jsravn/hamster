@@ -9,11 +9,25 @@
     name: prometheus-node-exporter
     state: present
 
+- name: monitoring | install alertmanager
+  apt:
+    name: prometheus-alertmanager
+    state: present
+
 - name: monitoring | copy prometheus config
   copy:
-    src: prometheus.yml
-    dest: /etc/prometheus/prometheus.yml
+    src: "{{ item }}"
+    dest: /etc/prometheus/{{ item }}
   notify: restart prometheus
+  with_items:
+  - prometheus.yml
+  - node-rules.yml
+
+- name: monitoring | copy alertmanager config
+  template:
+    src: alertmanager.yml
+    dest: /etc/prometheus/alertmanager.yml
+  notify: restart alertmanager
 
 - name: monitoring | grafana apt key
   apt_key:
@@ -38,4 +52,5 @@
   with_items:
   - prometheus
   - prometheus-node-exporter
+  - prometheus-alertmanager
   - grafana-server
