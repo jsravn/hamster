@@ -12,7 +12,11 @@
   copy: src=unbound dest=/etc/default/unbound
   notify: restart unbound
 
-- name: dns | copy home config
+- name: dns | copy server config
+  copy: src=server.conf dest=/etc/unbound/unbound.conf.d/
+  notify: restart unbound
+
+- name: dns | copy home zone config
   copy: src=home.conf dest=/etc/unbound/unbound.conf.d/
   notify: restart unbound
 
