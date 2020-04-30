@@ -29,6 +29,12 @@
     dest: /etc/prometheus/alertmanager.yml
   notify: restart alertmanager
 
+- name: monitoring | copy alertmanager service config
+  copy:
+    src: etc_default_prometheus-alertmanager
+    dest: /etc/default/prometheus-alertmanager
+  notify: restart alertmanager
+
 - name: monitoring | grafana apt key
   apt_key:
     url: https://packages.grafana.com/gpg.key
