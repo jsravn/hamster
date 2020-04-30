@@ -28,7 +28,7 @@ infrequently, but is necessary to ensure the security of the device.
 
 # Networking
 
-The network is setup based on a four port router using UK's openreach FTTC, which uses vDSL and pppoe. It will
+The network is setup based on a four port router using a DHCP based cable mode in bridge mode. It will
 need to be modified based on your own configuration.
 
 # Grafana
