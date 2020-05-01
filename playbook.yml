@@ -10,3 +10,4 @@
     - { role: dhcp, tags: dhcp }
     - { role: monitoring, tags: monitoring }
     - { role: unifi, tags: unifi }
+    - { role: landingpage, tags: landingpage }

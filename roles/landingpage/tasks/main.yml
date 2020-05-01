@@ -1,0 +1,16 @@
+---
+- name: landingpage | install nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: landingpage | start and enable nginx service
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: landingpage | copy index page
+  copy:
+    src: index.html
+    dest: /var/www/html/
