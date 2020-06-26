@@ -24,12 +24,8 @@
   copy: src=block.conf dest=/etc/unbound/unbound.conf.d/
   notify: restart unbound
 
-# - name: dns | copy youtube config
-#   copy: src=youtube.conf dest=/etc/unbound/unbound.conf.d/
-#   notify: restart unbound
-
-- name: dns | remove youtube config
-  file: path=/etc/unbound/unbound.conf.d/youtube.conf state=absent
+- name: dns | copy youtube config
+  copy: src=youtube.conf dest=/etc/unbound/unbound.conf.d/
   notify: restart unbound
 
 - name: unbound | enable unbound server
