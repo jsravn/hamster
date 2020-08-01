@@ -25,10 +25,10 @@ iface br0 inet static
         netmask 255.255.255.0
 
 # Wireguard (relies on the wireguard role)
-# auto wg0
-# iface wg0 inet static
-#     address {{ wireguard_ip }}
-#     netmask 255.255.255.0
-#     pre-up ip link add $IFACE type wireguard
-#     pre-up wg setconf $IFACE /etc/wireguard/$IFACE.conf
-#     post-down ip link del $IFACE
+auto wg0
+iface wg0 inet static
+    address {{ wireguard_ip }}
+    netmask 255.255.255.0
+    pre-up ip link add $IFACE type wireguard
+    pre-up wg setconf $IFACE /etc/wireguard/$IFACE.conf
+    post-down ip link del $IFACE

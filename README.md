@@ -37,3 +37,17 @@ Grafana doesn't lend itself well to automation. So it is set up manually:
 
 1. Add the prometheus datasource at localhost:9090.
 2. Add the node exporter dashboard from  https://grafana.com/grafana/dashboards/1860.
+
+# Wireguard
+
+To add a user, first create a private/public keypair:
+
+``` sh
+wg genkey | tee privatekey | wg pubkey > publickey
+```
+
+Then:
+1. Copy wg-client.conf.template and fill in the keys.
+2. Store this somewhere for later usage. (e.g. Tomes).
+2. Update wg0.conf with the new peer in this repo.
+3. Set up the wireguard client. Run `qrencode -t ansiutf8 < wg-client.conf` to get a QR code for easy scanning.

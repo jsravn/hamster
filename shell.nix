@@ -2,7 +2,9 @@ let
   pkgs = import <nixpkgs> {};
 in
 pkgs.mkShell {
-  buildInputs = [
-    pkgs.ansible
+  buildInputs = with pkgs; [
+    ansible
+    wireguard
+    qrencode
   ];
 }

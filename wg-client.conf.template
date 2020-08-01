@@ -1,0 +1,9 @@
+[Interface]
+PrivateKey = <client privatekey>
+Address = <client addr, e.g. 10.82.82.2>/32
+DNS = 10.82.82.1
+
+[Peer]
+PublicKey = icIMQQUpxyem20quIhRvZPX5gpCjAyBfmwzcZiAY2R0=
+Endpoint = home.r-vn.org:51820
+AllowedIPs = 0.0.0.0/0, ::/0

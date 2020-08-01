@@ -1,5 +1,5 @@
 #ACTION SOURCE              DEST                    PROTO   DPORT   SPORT   ORIGDEST
 ACCEPT  wan                 fw                      icmp    0,3,4,8,11
 # wireguard/vpn
-#ACCEPT  wan                 fw                      udp     {{ wireguard_port }}
+ACCEPT  wan                 fw                      udp     {{ wireguard_port }}
 #DROP lan:192.168.82.102     all
