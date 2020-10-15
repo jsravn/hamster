@@ -15,6 +15,8 @@ wireguard_pubkey: icIMQQUpxyem20quIhRvZPX5gpCjAyBfmwzcZiAY2R0=
 # wireguard users
 wireguard_ip_james: 10.82.82.2
 wireguard_pubkey_james: kMGX5iBTRAAU89QR4MBrWTV084w4I3DFXs18249oiA4=
+wireguard_ip_lizzie: 10.82.82.3
+wireguard_pubkey_lizzie: Eb9knEjshNPM7pN2kELdODrklaHKMwhm2FnVgp+zr1c=
 
 # fastmail smtp password
 fastmail_smtp_pass: !vault |
