@@ -3,7 +3,7 @@ let
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    ansible
+    ansible_2_8
     wireguard
     qrencode
   ];
