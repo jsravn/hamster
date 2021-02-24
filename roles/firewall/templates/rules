@@ -1,5 +1,7 @@
 #ACTION SOURCE              DEST                    PROTO   DPORT   SPORT   ORIGDEST
+# pings
 ACCEPT  wan                 fw                      icmp    0,3,4,8,11
 # wireguard/vpn
 ACCEPT  wan                 fw                      udp     {{ wireguard_port }}
-#DROP lan:192.168.82.102     all
+# plex
+DNAT    wan                 lan:192.168.82.4:32400  tcp     45911
