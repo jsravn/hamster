@@ -3,19 +3,6 @@
   copy: src=journald.conf dest=/etc/systemd/journald.conf
   notify: restart journald
 
-# Unstable repo used only for wireguard. The limit-unstable file
-# prevents packages from inadvertently coming from unstable unless
-# explicitly installed.
-- copy: src=limit-unstable dest=/etc/apt/preferences.d/
-
-- apt_repository:
-    repo: deb http://deb.debian.org/debian/ unstable main
-    state: present
-
-- name: system | setup apt sources
-  copy: src=sources.list dest=/etc/apt/sources.list
-  register: r
-
 - name: system | update apt
   command: apt update
   when: r is changed
@@ -36,15 +23,6 @@
   package: name={{ item }} state=present
   with_items:
     - unattended-upgrades
-
-- name: system | install chrony
-  package: name=chrony state=present
-
-- name: system | enable chrony
-  service: name=chrony enabled=yes
-
-- name: system | remove smartmontools - doesn't work on mmc
-  package: name=smartmontools state=absent
 
 - name: system | configure unattended upgrades
   template: src={{ item }} dest=/etc/apt/apt.conf.d/{{ item }}

@@ -9,7 +9,7 @@ If you want to use it:
 4. Update `inventory` with the IP address of your router.
 5. Run `./setup.sh`.
 
-The requirement is a router with Debian loaded on it, and ssh keys setup.
+The requirement is a router with Ubuntu Server 20.04 loaded on it, and ssh keys setup.
 
 The goals are:
 * Vanilla, secure home router with high performance.
@@ -30,13 +30,6 @@ infrequently, but is necessary to ensure the security of the device.
 
 The network is setup based on a four port router using a DHCP based cable mode in bridge mode. It will
 need to be modified based on your own configuration.
-
-# Grafana
-
-Grafana doesn't lend itself well to automation. So it is set up manually:
-
-1. Add the prometheus datasource at localhost:9090.
-2. Add the node exporter dashboard from  https://grafana.com/grafana/dashboards/1860.
 
 # Wireguard
 

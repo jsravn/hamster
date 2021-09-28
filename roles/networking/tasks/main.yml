@@ -1,24 +1,24 @@
 ---
 - name: networking | install bridge-utils
-  package: name=bridge-utils state=present
+  package:
+    name: bridge-utils
+    state: present
 
 - name: networking | configure interfaces
-  template: src=interfaces dest=/etc/network/interfaces
+  template:
+    src: interfaces
+    dest: /etc/network/interfaces
   notify: restart networking
 
 - name: networking | enable ip forwarding
-  sysctl: name=net.ipv4.ip_forward value=1
-
-- name: networking | remove ppp files
-  file: path={{ item }} state=absent
-  notify: restart networking
-  with_items:
-  - /etc/ppp/peers/provider
-  - /etc/ppp/ip-up.d/ethtool
-  - /etc/ppp/ip-up.d/shorewall
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
 
 - name: networking | turn on fq_codel as default qdisc
-  sysctl: name=net.core.default_qdisc value=fq_codel
+  sysctl:
+    name: net.core.default_qdisc
+    value: fq_codel
   notify: restart networking
 
 - name: networking | expand ephemeral port range
