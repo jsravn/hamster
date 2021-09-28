@@ -33,6 +33,11 @@ STARTOPTIONS=""
 RESTARTOPTIONS=""
 
 #
+# Reload options
+#
+RELOADOPTIONS=""
+
+#
 # Init Log -- if /dev/null, use the STARTUP_LOG defined in shorewall.conf
 #
 INITLOG=/dev/null

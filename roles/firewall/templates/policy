@@ -1,5 +1,5 @@
 #SOURCE       DESTINATION         POLICY         LOGLEVEL          BURST
-wan           all                 DROP
+wan           all                 ACCEPT
 fw            all                 ACCEPT
 lan           all                 ACCEPT
 vpn           all                 ACCEPT

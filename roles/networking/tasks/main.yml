@@ -4,11 +4,23 @@
     name: bridge-utils
     state: present
 
-- name: networking | configure interfaces
-  template:
-    src: interfaces
-    dest: /etc/network/interfaces
+- name: networking | remove installer config
+  file:
+    path: /etc/netplan/00-installer-config.yaml
+    state: absent
   notify: restart networking
+
+- name: networking | install netplan configuration
+  template:
+    src: 99-network.yaml
+    dest: /etc/netplan/
+  notify: restart networking
+  
+# - name: networking | configure interfaces
+#   template:
+#     src: interfaces
+#     dest: /etc/network/interfaces
+#   notify: restart networking
 
 - name: networking | enable ip forwarding
   sysctl:
@@ -19,10 +31,13 @@
   sysctl:
     name: net.core.default_qdisc
     value: fq_codel
-  notify: restart networking
 
 - name: networking | expand ephemeral port range
-  sysctl: name=net.ipv4.ip_local_port_range value="1024 65535"
+  sysctl:
+    name: net.ipv4.ip_local_port_range
+    value: "1024 65535"
 
 - name: networking | enable ecn
-  sysctl: name=net.ipv4.tcp_ecn value=1
+  sysctl:
+    name: net.ipv4.tcp_ecn
+    value: 1

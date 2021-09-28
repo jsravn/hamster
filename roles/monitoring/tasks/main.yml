@@ -2,6 +2,12 @@
   apt:
     package: netdata
 
+- name: monitoring | netdata config
+  template:
+    src: netdata.conf
+    dest: /etc/netdata/
+  notify: restart netdata
+
 - name: monitoring | start and enable netdata
   service:
     name: netdata

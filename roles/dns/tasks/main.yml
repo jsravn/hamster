@@ -1,38 +1,28 @@
 ---
-- name: dns | install resolvconf so unbound can update local dns
-  package: name=resolvconf state=present
-
-- name: dns | enable resolvconf
-  service: name=resolvconf state=started enabled=yes
-
 - name: dns | install server
-  package: name=unbound state=present
-
-- name: dns | copy defaults config
-  copy: src=unbound dest=/etc/default/unbound
-  notify: restart unbound
+  package:
+    name: unbound
+    state: present
 
 - name: dns | copy server config
-  copy: src=server.conf dest=/etc/unbound/unbound.conf.d/
+  template:
+    src: server.conf
+    dest: /etc/unbound/unbound.conf.d/
   notify: restart unbound
 
 - name: dns | copy home zone config
-  copy: src=home.conf dest=/etc/unbound/unbound.conf.d/
+  template:
+    src: home.conf
+    dest: /etc/unbound/unbound.conf.d/
   notify: restart unbound
 
-# - name: dns | copy blocking config
-#   copy: src=block.conf dest=/etc/unbound/unbound.conf.d/
-#   notify: restart unbound
-- name: dns | remove blocking config
-  file: path=/etc/unbound/unbound.conf.d/block.conf state=absent
-  notify: restart unbound
+- name: dns | enable unbound server
+  service:
+    name: unbound
+    enabled: yes
 
-# - name: dns | copy youtube config
-#   copy: src=youtube.conf dest=/etc/unbound/unbound.conf.d/
-#   notify: restart unbound
-- name: dns | remove youtube config
-  file: path=/etc/unbound/unbound.conf.d/youtube.conf state=absent
-  notify: restart unbound
-
-- name: unbound | enable unbound server
-  service: name=unbound enabled=yes
+- name: dns | disable systemd-resolved :53
+  copy:
+    src: resolved.conf
+    dest: /etc/systemd/resolved.conf
+  notify: restart systemd-resolved

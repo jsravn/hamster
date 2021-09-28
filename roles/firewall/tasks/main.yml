@@ -1,6 +1,8 @@
 ---
 - name: firewall | install shorewall
-  package: name=shorewall state=present
+  package:
+    name: shorewall
+    state: present
 
 - name: firewall | shorewall defaults
   copy: src=etc_default_shorewall dest=/etc/default/shorewall
@@ -9,23 +11,17 @@
     - reload shorewall
 
 - name: firewall | shorewall conf
-  copy: src=shorewall.conf dest=/etc/shorewall/shorewall.conf
-  notify:
-    - check shorewall
-    - reload shorewall
-
-- name: firewall | remove old files
-  file: state=absent path=/etc/shorewall/{{ item }}
-  with_items:
-    - init
-    - tcclasses
-    - tcdevices
+  copy:
+    src: shorewall.conf
+    dest: /etc/shorewall/shorewall.conf
   notify:
     - check shorewall
     - reload shorewall
 
 - name: firewall | shorewall config files
-  template: src={{ item }} dest=/etc/shorewall/{{ item }}
+  template:
+    src: "{{ item }}"
+    dest: /etc/shorewall/{{ item }}
   with_items:
     - snat
     - interfaces
@@ -40,4 +36,7 @@
     - reload shorewall
 
 - name: firewall | enable shorewall
-  service: name=shorewall enabled=yes state=started
+  service:
+    name: shorewall
+    enabled: yes
+    state: started
