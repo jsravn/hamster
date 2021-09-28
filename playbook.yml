@@ -3,11 +3,10 @@
   become: yes
   roles:
     - { role: system, tags: system }
-    - { role: wireguard, tags: wireguard }
     - { role: networking, tags: networking }
-    - { role: firewall, tags: firewall }
     - { role: dns, tags: dns }
     - { role: dhcp, tags: dhcp }
+    - { role: firewall, tags: firewall }
     - { role: monitoring, tags: monitoring }
-    - { role: unifi, tags: unifi }
+    # - { role: unifi, tags: unifi }
     - { role: landingpage, tags: landingpage }

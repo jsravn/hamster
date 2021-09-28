@@ -1,0 +1,43 @@
+network:
+  version: 2
+
+  ethernets:
+    # WAN
+    enp1s0:
+      dhcp4: yes
+      dhcp4-overrides:
+        use-dns: false
+        use-ntp: false
+        send-hostname: false
+      addresses:
+        - 192.168.100.2/24
+    enp2s0:
+      dhcp4: no
+    enp3s0:
+      dhcp4: no
+    enp4s0:
+      dhcp4: no
+
+  bridges:
+    # LAN, OPT1, OPT2
+    br0:
+      interfaces:
+        - enp2s0
+        - enp3s0
+        - enp4s0
+      addresses:
+        - "{{ lan_net }}.1/24"
+
+  tunnels:
+    wg0:
+      mode: wireguard
+      addresses:
+        - "{{ wireguard_ip }}/24"
+      keys:
+        private: "{{ wireguard_privatekey }}"
+      port: "{{ wireguard_port }}"
+      peers:
+        - keys:
+            public: "{{ wireguard_pubkey_james }}"
+          allowed-ips:
+            - "{{ wireguard_ip_james }}/32"

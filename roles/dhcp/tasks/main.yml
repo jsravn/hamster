@@ -1,17 +1,27 @@
 ---
 - name: dhcp | install server
-  package: name=isc-dhcp-server state=present
+  package:
+    name: isc-dhcp-server
+    state: present
 
 - name: dhcp | copy defaults config
-  copy: src=isc-dhcp-server dest=/etc/default/isc-dhcp-server
+  copy:
+    src: isc-dhcp-server
+    dest: /etc/default/isc-dhcp-server
   notify: restart dhcpd
 
 - name: dhcp | copy dhcpd config
-  copy: src=dhcpd.conf dest=/etc/dhcp/dhcpd.conf
+  template:
+    src: dhcpd.conf
+    dest: /etc/dhcp/dhcpd.conf
   notify: restart dhcpd
 
 - name: dhcp | enable dhcpd server
-  service: name=isc-dhcp-server enabled=yes
+  service:
+    name: isc-dhcp-server
+    enabled: yes
 
 - name: dhcp | copy oui.txt for dhcp-lease-list
-  copy: src=oui.txt dest=/usr/local/etc/oui.txt
+  copy:
+    src: oui.txt
+    dest: /usr/local/etc/oui.txt

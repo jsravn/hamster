@@ -1,7 +1,0 @@
----
-- package:
-    name: wireguard
-    state: present
-
-- template: src=wg0.conf dest=/etc/wireguard/ mode=0600
-  notify: restart networking

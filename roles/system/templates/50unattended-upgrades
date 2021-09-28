@@ -1,44 +1,20 @@
-// Unattended-Upgrade::Origins-Pattern controls which packages are
-// upgraded.
+// Automatically upgrade packages from these (origin:archive) pairs
 //
-// Lines below have the format format is "keyword=value,...".  A
-// package will be upgraded only if the values in its metadata match
-// all the supplied keywords in a line.  (In other words, omitted
-// keywords are wild cards.) The keywords originate from the Release
-// file, but several aliases are accepted.  The accepted keywords are:
-//   a,archive,suite (eg, "stable")
-//   c,component     (eg, "main", "contrib", "non-free")
-//   l,label         (eg, "Debian", "Debian-Security")
-//   o,origin        (eg, "Debian", "Unofficial Multimedia Packages")
-//   n,codename      (eg, "jessie", "jessie-updates")
-//     site          (eg, "http.debian.net")
-// The available values on the system are printed by the command
-// "apt-cache policy", and can be debugged by running
-// "unattended-upgrades -d" and looking at the log file.
-//
-// Within lines unattended-upgrades allows 2 macros whose values are
-// derived from /etc/debian_version:
-//   ${distro_id}            Installed origin.
-//   ${distro_codename}      Installed codename (eg, "buster")
-Unattended-Upgrade::Origins-Pattern {
-        // Codename based matching:
-        // This will follow the migration of a release through different
-        // archives (e.g. from testing to stable and later oldstable).
-        // Software will be the latest available for the named release,
-        // but the Debian release itself will not be automatically upgraded.
-        "origin=Debian,codename=${distro_codename}-updates";
-//      "origin=Debian,codename=${distro_codename}-proposed-updates";
-        "origin=Debian,codename=${distro_codename},label=Debian";
-        "origin=Debian,codename=${distro_codename},label=Debian-Security";
-
-        // Archive or Suite based matching:
-        // Note that this will silently match a different release after
-        // migration to the specified archive (e.g. testing becomes the
-        // new stable).
-//      "o=Debian,a=stable";
-//      "o=Debian,a=stable-updates";
-//      "o=Debian,a=proposed-updates";
-//      "o=Debian Backports,a=${distro_codename}-backports,l=Debian Backports";
+// Note that in Ubuntu security updates may pull in new dependencies
+// from non-security sources (e.g. chromium). By allowing the release
+// pocket these get automatically pulled in.
+Unattended-Upgrade::Allowed-Origins {
+	"${distro_id}:${distro_codename}";
+	"${distro_id}:${distro_codename}-security";
+	// Extended Security Maintenance; doesn't necessarily exist for
+	// every release and this system may not have it installed, but if
+	// available, the policy for updates is such that unattended-upgrades
+	// should also install from here by default.
+	"${distro_id}ESMApps:${distro_codename}-apps-security";
+	"${distro_id}ESM:${distro_codename}-infra-security";
+//	"${distro_id}:${distro_codename}-updates";
+//	"${distro_id}:${distro_codename}-proposed";
+//	"${distro_id}:${distro_codename}-backports";
 };
 
 // Python regular expressions, matching packages to exclude from upgrading
@@ -62,6 +38,10 @@ Unattended-Upgrade::Package-Blacklist {
     // For more information about Python regular expressions, see
     // https://docs.python.org/3/howto/regex.html
 };
+
+// This option controls whether the development release of Ubuntu will be
+// upgraded automatically. Valid values are "true", "false", and "auto".
+Unattended-Upgrade::DevRelease "auto";
 
 // This option allows you to control if on a unclean dpkg exit
 // unattended-upgrades will automatically run 
@@ -92,16 +72,18 @@ Unattended-Upgrade::Package-Blacklist {
 // 'mailx' must be installed. E.g. "user@example.com"
 //Unattended-Upgrade::Mail "";
 
-// Set this value to "true" to get emails only on errors. Default
-// is to always send a mail if Unattended-Upgrade::Mail is set
-//Unattended-Upgrade::MailOnlyOnError "false";
+// Set this value to one of:
+//    "always", "only-on-error" or "on-change"
+// If this is not set, then any legacy MailOnlyOnError (boolean) value
+// is used to chose between "only-on-error" and "on-change"
+//Unattended-Upgrade::MailReport "on-change";
 
 // Remove unused automatically installed kernel-related packages
 // (kernel images, kernel headers and kernel version locked tools).
 //Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
 
 // Do automatic removal of newly unused dependencies after the upgrade
-Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
+//Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
 
 // Do automatic removal of unused packages after the upgrade
 // (equivalent to apt-get autoremove)
@@ -109,7 +91,7 @@ Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
 
 // Automatically reboot *WITHOUT CONFIRMATION* if
 //  the file /var/run/reboot-required is found after the upgrade
-Unattended-Upgrade::Automatic-Reboot "true";
+//Unattended-Upgrade::Automatic-Reboot "false";
 
 // Automatically reboot even if there are users currently logged in
 // when Unattended-Upgrade::Automatic-Reboot is set to true
@@ -118,7 +100,7 @@ Unattended-Upgrade::Automatic-Reboot "true";
 // If automatic reboot is enabled and needed, reboot at the specific
 // time instead of immediately
 //  Default: "now"
-Unattended-Upgrade::Automatic-Reboot-Time "{{ reboot_time }}";
+//Unattended-Upgrade::Automatic-Reboot-Time "02:00";
 
 // Use apt bandwidth limit feature, this example limits the download
 // speed to 70kb/sec
@@ -144,3 +126,6 @@ Unattended-Upgrade::Automatic-Reboot-Time "{{ reboot_time }}";
 // Print debugging information both in unattended-upgrades and
 // in unattended-upgrade-shutdown
 // Unattended-Upgrade::Debug "false";
+
+// Allow package downgrade if Pin-Priority exceeds 1000
+// Unattended-Upgrade::Allow-downgrade "false";

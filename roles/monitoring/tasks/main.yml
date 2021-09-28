@@ -1,62 +1,15 @@
----
-- name: monitoring | install prometheus
+- name: monitoring | install netdata
   apt:
-    name: prometheus
-    state: present
+    package: netdata
 
-- name: monitoring | install node-exporter
-  apt:
-    name: prometheus-node-exporter
-    state: present
-
-- name: monitoring | install alertmanager
-  apt:
-    name: prometheus-alertmanager
-    state: present
-
-- name: monitoring | copy prometheus config
-  copy:
-    src: "{{ item }}"
-    dest: /etc/prometheus/{{ item }}
-  notify: restart prometheus
-  with_items:
-  - prometheus.yml
-  - node-rules.yml
-
-- name: monitoring | copy alertmanager config
+- name: monitoring | netdata config
   template:
-    src: alertmanager.yml
-    dest: /etc/prometheus/alertmanager.yml
-  notify: restart alertmanager
+    src: netdata.conf
+    dest: /etc/netdata/
+  notify: restart netdata
 
-- name: monitoring | copy alertmanager service config
-  copy:
-    src: etc_default_prometheus-alertmanager
-    dest: /etc/default/prometheus-alertmanager
-  notify: restart alertmanager
-
-- name: monitoring | grafana apt key
-  apt_key:
-    url: https://packages.grafana.com/gpg.key
-    state: present
-
-- name: monitoring | grafana apt repo
-  apt_repository:
-    repo: deb https://packages.grafana.com/oss/deb stable main
-    state: present
-
-- name: monitoring | install grafana
-  apt:
-    name: grafana
-    state: present
-
-- name: monitoring | start and enable services
+- name: monitoring | start and enable netdata
   service:
-    name: "{{ item }}"
-    enabled: yes
+    name: netdata
     state: started
-  with_items:
-  - prometheus
-  - prometheus-node-exporter
-  - prometheus-alertmanager
-  - grafana-server
+    enabled: yes
