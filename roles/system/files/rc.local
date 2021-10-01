@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+# Fix fifo rx errors on WAN interface.
+ethtool -G enp1s0 rx 512 tx 256
+exit 0

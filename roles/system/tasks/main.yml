@@ -1,6 +1,8 @@
 ---
 - name: system | install useful packages
-  package: name={{ item }} state=present
+  package:
+    name: "{{ item }}"
+    state: present
   with_items:
     - vim
     - tmux
@@ -9,7 +11,17 @@
     - curl
 
 - name: system | configure unattended upgrades
-  template: src={{ item }} dest=/etc/apt/apt.conf.d/{{ item }}
+  template:
+    src: "{{ item }}"
+    dest: /etc/apt/apt.conf.d/{{ item }}
   with_items:
     - 50unattended-upgrades
     - 20auto-upgrades
+
+- name: system | install rc.local
+  copy:
+    src: rc.local
+    dest: /etc/rc.local
+    mode: 0755
+  notify:
+    - exec rc.local
