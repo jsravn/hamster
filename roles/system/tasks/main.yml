@@ -9,6 +9,7 @@
     - conntrack
     - htop
     - curl
+    - python3-pip
 
 - name: system | configure unattended upgrades
   template:

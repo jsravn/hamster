@@ -8,5 +8,6 @@
     - { role: dhcp, tags: dhcp }
     - { role: firewall, tags: firewall }
     - { role: monitoring, tags: monitoring }
+    # - { role: docker, tags: docker }
     # - { role: unifi, tags: unifi }
     - { role: landingpage, tags: landingpage }

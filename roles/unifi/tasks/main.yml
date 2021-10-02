@@ -1,73 +1,35 @@
 ---
-# From https://www.kobelnet.ch/2019/12/06/setup-unifi-controller-on-debian-10-buster
-# Unifi requires an ancient version of mongodb, so there is a dance involved to get it installed.
-#
-- name: unifi | install pre-requisites
-  apt:
-    name: ['ca-certificates', 'apt-transport-https', 'xz-utils']
-    state: present
+- name: unifi | create directories
+  file:
+    path: /opt/unifi
+    state: directory
+    mode: 0755
 
-- name: unifi | mongodb | add apt key
-  apt_key:
-    url: https://www.mongodb.org/static/pgp/server-3.4.asc
-    state: present
-
-- name: unifi | mongodb | add apt sources
-  apt_repository:
-    repo: deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/3.4 main
-    state: present
-
-- name: unifi | mongodb | add old libssl required by 3.4
-  apt:
-    deb: http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u12_amd64.deb
-    state: present
-
-- name: unifi | mongodb | install
-  apt:
-    name: mongodb-org-server
-    state: present
-
-- name: unifi | java8 | add apt key
-  apt_key:
-    url: https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public
-    state: present
-
-- name: unifi | java8 | add apt repository
-  apt_repository:
-    repo: deb https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ buster main
-    state: present
-
-- name: unifi | java8 | install
-  apt:
-    name: adoptopenjdk-8-hotspot
-    state: present
-
-- name: unifi | add apt key
-  apt_key:
-    url: https://dl.ui.com/unifi/unifi-repo.gpg
-    state: present
-
-- name: unifi | add apt sources
-  apt_repository:
-    repo: deb https://www.ui.com/downloads/unifi/debian stable ubiquiti
-    state: present
-
-- name: unifi | install unifi controller
-  apt:
+- name: unifi | stop and remove existing container
+  docker_container:
     name: unifi
-    state: present
+    state: absent
 
-- name: unifi | copy config with JAVA_HOME set to jdk8
-  copy:
-    src: etc_default_unifi
-    dest: /etc/default/unifi
-  notify: restart unifi
+- name: unifi | pull latest unifi image
+  docker_image:
+    name: linuxserver/unifi-controller:latest
+    source: pull
 
-- name: unifi | enable and start services
-  service:
-    name: "{{ item }}"
-    enabled: yes
+- name: unifi | create and start container
+  docker_container:
+    name: unifi
+    image: linuxserver/unifi-controller:latest
+    published_ports:
+      - 3478:3478/udp
+      - 10001:10001/udp
+      - 8080:8080
+      - 8443:8443
+    volumes:
+      - /opt/unifi:/config
+    networks:
+      - name: bridge
+        aliases:
+          - unifi
+    purge_networks: yes
+    restart_policy: unless-stopped
     state: started
-  with_items:
-  - mongod
-  - unifi

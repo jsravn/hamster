@@ -18,6 +18,14 @@
     - check shorewall
     - reload shorewall
 
+# - name: firewall | fix systemd service to not break docker rules
+#   copy:
+#     src: override.conf
+#     dest: /etc/systemd/system/shorewall.service.d/
+#   notify:
+#     - reload systemd
+#     - reload shorewall
+
 - name: firewall | shorewall config files
   template:
     src: "{{ item }}"
