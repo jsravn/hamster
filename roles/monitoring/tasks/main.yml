@@ -1,6 +1,16 @@
-- name: monitoring | install netdata
-  apt:
-    package: netdata
+- name: monitoring | download installation script
+  get_url:
+    url: https://my-netdata.io/kickstart.sh
+    dest: ~/kickstart.sh
+    mode: +x
+
+- name: monitoring | run installation script
+  command: ~/kickstart.sh --dont-wait
+
+- name: monitoring | cleanup installation script
+  file:
+    path: ~/kickstart.sh
+    state: absent
 
 - name: monitoring | netdata config
   template:
