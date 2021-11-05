@@ -1,5 +1,5 @@
 #ACTION SOURCE              DEST                    PROTO   DPORT   SPORT   ORIGDEST
 # pings
-ACCEPT  wan                 fw                      icmp    0,3,4,8,11
+ACCEPT  fw                  lan                     icmp    0,3,8
 # wireguard/vpn
 ACCEPT  wan                 fw                      udp     {{ wireguard_port }}
