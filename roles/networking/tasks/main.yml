@@ -15,7 +15,7 @@
     src: 99-network.yaml
     dest: /etc/netplan/
   notify: restart networking
-  
+
 # - name: networking | configure interfaces
 #   template:
 #     src: interfaces
@@ -41,3 +41,8 @@
   sysctl:
     name: net.ipv4.tcp_ecn
     value: 1
+
+- name: networking | double softnet time to give more cpu to interrupt processing and remove softnet drops
+  sysctl:
+    name: net.core.netdev_budget
+    value: 600
