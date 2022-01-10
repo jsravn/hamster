@@ -11,6 +11,13 @@
     - curl
     - python3-pip
 
+- name: system | remove unwanted packages
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - snapd
+
 - name: system | configure unattended upgrades
   template:
     src: "{{ item }}"

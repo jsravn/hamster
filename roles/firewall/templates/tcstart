@@ -1,28 +1,28 @@
 #!/bin/sh
 
-#modprobe sch_cake
+modprobe sch_cake
 #modprobe act_mirred
 
-#iface="enp1s0"
-#outbound="bandwidth 37mbit"
-# inbound="bandwidth 380mbit"
+iface="enp1s0"
+outbound="bandwidth 37mbit"
+inbound="bandwidth 380mbit"
 
 # Set up outbound AQM.
-#tc qdisc del dev $iface root 2>/dev/null || true
-#tc qdisc add dev $iface root cake $outbound besteffort nat docsis regional
+tc qdisc del dev $iface root 2>/dev/null || true
+tc qdisc add dev $iface root cake $outbound besteffort nat docsis regional
 
 # Set up inbound AQM.
-# if ! ip link show ifb4${iface} > /dev/null; then
-#     ip link add name ifb4${iface} type ifb
-# fi
+if ! ip link show ifb4${iface} > /dev/null; then
+    ip link add name ifb4${iface} type ifb
+fi
 
-# tc qdisc del dev $iface handle ffff: ingress 2>/dev/null || true
-# tc qdisc add dev $iface handle ffff: ingress
+tc qdisc del dev $iface handle ffff: ingress 2>/dev/null || true
+tc qdisc add dev $iface handle ffff: ingress
 
-# tc qdisc del dev ifb4${iface} root 2>/dev/null || true
-# tc qdisc add dev ifb4${iface} root cake $inbound besteffort nat docsis regional
+tc qdisc del dev ifb4${iface} root 2>/dev/null || true
+tc qdisc add dev ifb4${iface} root cake $inbound besteffort nat docsis regional
 
-# ip link set dev ifb4${iface} up
+ip link set dev ifb4${iface} up
 
-# tc filter add dev $iface parent ffff: protocol all prio 10 u32 \
-#     match u32 0 0 flowid 1:1 action mirred egress redirect dev ifb4${iface}
+tc filter add dev $iface parent ffff: protocol all prio 10 u32 \
+    match u32 0 0 flowid 1:1 action mirred egress redirect dev ifb4${iface}
